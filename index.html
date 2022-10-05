@@ -1,0 +1,62 @@
+<html>
+<head>
+  <style>
+    tr,td {border: 1px solid black; width: 40px; height: 40px} 
+    .b {background-color: blue;}   
+    .g {background-color: grey;} 
+    .br {background-color: brown;}
+ </style>
+  <title>Stacveluya</title>
+</head>
+<body> 
+<center>
+<form>
+    <button id="Get">get</button>
+</form>
+</center>
+
+<script>
+
+const getBtn=document.getElementById("Get")
+const input=document.getElementById("input")
+const baseUrl='http://localhost:8383/info'
+
+getBtn.addEventListener('click', httpGet)
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+var m=httpGet('http://localhost:8383/info')
+var mArray = m.split(",");
+var html, i=1, j=1, k=0, l=0, p=0;
+      html= '<table>';
+     for(i;i<17;i++){
+      html+='<tr>';
+      for(j;j<17;j++){
+    var n= parseInt(mArray[k])
+        if (n==5 || n==4  || n==3){
+          html+='<td class="b"></td>';
+          k++;
+        }
+        if (n==0 || n==1  || n==2 ){
+          html+='<td class="br"></td>';
+          k++;
+        }
+        if (n==-1){
+          html+='<td class="g"></td>';
+          k++;
+        }
+  
+       };
+       j=1;
+      html+='</tr>';
+     };
+     html+='</table>';
+     document.write(html);
+</script>
+
+</body>
+</html>
